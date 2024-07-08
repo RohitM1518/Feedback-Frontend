@@ -6,6 +6,7 @@ import { logout } from '../redux/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useLoadingContext } from '../contexts/LoadingContext';
 
 export default function UserProfile({ imgSrc  }) {
   const userImg = useSelector(state=>state.currentUser?.user?.avatar)
