@@ -25,7 +25,7 @@ export default function SignUp({role="user"}) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [selectedFile, setSelectedFile] = React.useState(null);
-  const backendURL = import.meta.env.BACKEND_URL
+  const backendURL = import.meta.env.VITE_BACKEND_URL
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

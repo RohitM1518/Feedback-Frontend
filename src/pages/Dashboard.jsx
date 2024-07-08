@@ -34,7 +34,7 @@ const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [sortBy, setSortBy] = React.useState('asc');
   const [sortOrder, setSortOrder] = React.useState('createdAt');
-  const backendURL = import.meta.env.BACKEND_URL
+  const backendURL = import.meta.env.VITE_BACKEND_URL
 
   const handleSortTypeChange = (event) => {
     setSortBy(event.target.value);

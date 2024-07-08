@@ -14,7 +14,7 @@ export default function Hero() {
     const user = useSelector(state => state.currentUser?.user)
     const accessToken = useSelector(state => state.currentUser?.accessToken)
     const [feedbacks, setFeedbacks] = React.useState([])
-    const backendURL = import.meta.env.BACKEND_URL
+    const backendURL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(() => {
         const getUserFeedbacks = async () => {

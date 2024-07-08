@@ -25,7 +25,7 @@ export default function SignIn({ role = "user" }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [error,setError] = React.useState("")
-    const backendURL = import.meta.env.BACKEND_URL
+    const backendURL = import.meta.env.VITE_BACKEND_URL
 
     const handleSubmit = async (event) => {
         event.preventDefault();

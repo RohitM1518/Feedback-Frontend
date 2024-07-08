@@ -14,7 +14,7 @@ export default function UserProfile({ imgSrc  }) {
   const accessToken = useSelector(state => state.currentUser?.accessToken)
   const dispatch = useDispatch()
   const open = Boolean(anchorEl);
-  const backendURL = import.meta.env.BACKEND_URL
+  const backendURL = import.meta.env.VITE_BACKEND_URL
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
