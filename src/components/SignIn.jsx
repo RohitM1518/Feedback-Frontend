@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import {errorParser} from '../utils/errorParser.js'
 import {ErrorMsg} from './index.js';
+import { useLoadingContext } from '../contexts/LoadingContext.jsx';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -26,7 +27,7 @@ export default function SignIn({ role = "user" }) {
     const dispatch = useDispatch();
     const [error,setError] = React.useState("")
     const backendURL = import.meta.env.VITE_BACKEND_URL
-
+    const {setIsLoading}=useLoadingContext()
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError("")
@@ -41,6 +42,7 @@ export default function SignIn({ role = "user" }) {
             role: role
         }
         try {
+            setIsLoading(true)
             const res = await axios.post(`${backendURL}/user/login`, payload)
             console.log(res.data.data.data)
             dispatch(login(res.data.data.data))
@@ -50,6 +52,9 @@ export default function SignIn({ role = "user" }) {
             const errorMsg = errorParser(error)
             console.log("Error ",errorMsg)
             setError(errorMsg)
+        }
+        finally{
+            setIsLoading(false)
         }
     };
 

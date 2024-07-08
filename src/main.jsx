@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { persistor } from './redux/store.js'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.js'
+import { LoadingContextProvider } from './contexts/LoadingContext.jsx'
 
 
 const router = createBrowserRouter([{
@@ -61,7 +62,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <LoadingContextProvider>
         <RouterProvider router={router} />
+        </LoadingContextProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

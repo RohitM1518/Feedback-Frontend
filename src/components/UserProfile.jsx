@@ -15,6 +15,7 @@ export default function UserProfile({ imgSrc  }) {
   const dispatch = useDispatch()
   const open = Boolean(anchorEl);
   const backendURL = import.meta.env.VITE_BACKEND_URL
+  const {setIsLoading}=useLoadingContext()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -25,6 +26,7 @@ export default function UserProfile({ imgSrc  }) {
 
   const logoutHandler = async () => {
     try {
+      setIsLoading(true)
       await axios.get(`${backendURL}/user/logout`, {
         withCredentials: true,
         headers: {
@@ -36,6 +38,9 @@ export default function UserProfile({ imgSrc  }) {
 
     } catch (error) {
       console.log("Error in logout", error)
+    }
+    finally{
+      setIsLoading(false)
     }
   }
 

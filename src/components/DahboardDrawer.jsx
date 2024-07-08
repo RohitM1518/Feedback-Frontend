@@ -13,7 +13,6 @@ import MailIcon from '@mui/icons-material/Mail';
 
 export default function DashboardDrawer() {
   const [open, setOpen] = React.useState(false);
-
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };

@@ -5,13 +5,15 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from './redux/userSlice.js';
 import { useEffect } from 'react';
-
+import { useLoadingContext } from './contexts/LoadingContext.jsx';
+import { LinearProgress } from '@mui/material';
 
 function App() {
   const dispatch = useDispatch()
   const refreshToken = useSelector(state => state.currentUser?.user?.refreshToken)
   const accessToken = useSelector(state => state.currentUser?.accessToken)
- const backendURL = import.meta.env.BACKEND_URL
+ const backendURL = import.meta.env.VITE_BACKEND_URL
+ const{isLoading}=useLoadingContext()
   useEffect(()=>{
   const refreshTheToken = async () => {
     try {
@@ -38,6 +40,9 @@ function App() {
   return (
     <div className=' flex flex-col'>
       <AppAppBar />
+      {isLoading && <div>
+      <LinearProgress />
+      </div>}
       <Outlet />
       <Footer />
     </div>

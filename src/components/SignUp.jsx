@@ -26,6 +26,7 @@ export default function SignUp({role="user"}) {
   const navigate = useNavigate()
   const [selectedFile, setSelectedFile] = React.useState(null);
   const backendURL = import.meta.env.VITE_BACKEND_URL
+  const {setIsLoading}=useLoadingContext()
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -45,12 +46,16 @@ export default function SignUp({role="user"}) {
 
 
     try {
+      setIsLoading(true)
       const res = await axios.post(`${backendURL}/user/register`, formData)
       dispatch(login(res.data.data.data))
       navigate('/')
 
     } catch (error) {
       console.log(error)
+    }
+    finally{
+      setIsLoading(false)
     }
   };
 

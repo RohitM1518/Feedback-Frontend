@@ -35,6 +35,7 @@ const Dashboard = () => {
   const [sortBy, setSortBy] = React.useState('asc');
   const [sortOrder, setSortOrder] = React.useState('createdAt');
   const backendURL = import.meta.env.VITE_BACKEND_URL
+  const {setIsLoading}=useLoadingContext()
 
   const handleSortTypeChange = (event) => {
     setSortBy(event.target.value);
@@ -45,6 +46,7 @@ const Dashboard = () => {
 
   const deleteFeedback = async (id) => {
     try {
+      setIsLoading(true)
       await axios.delete(`${backendURL}/feedback/${id}`, {
         withCredentials: true,
         headers: {
@@ -61,11 +63,15 @@ const Dashboard = () => {
     } catch (error) {
       throw error
     }
+    finally{
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
     const getSortedFeedbacks = async () => {
       try {
+        setIsLoading(true)
         const res = await axios.get(`${backendURL}/dashboard/getallfeedbacks?sortBy=${sortBy}&sortOrder=${sortOrder}`, {
           withCredentials: true,
           headers: {
@@ -76,6 +82,9 @@ const Dashboard = () => {
         console.log("admin feedbacks", res.data.data);
       } catch (error) {
         throw error;
+      }
+      finally{
+        setIsLoading(false)
       }
     };
     getSortedFeedbacks();
